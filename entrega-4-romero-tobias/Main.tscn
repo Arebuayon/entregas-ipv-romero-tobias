@@ -1,38 +1,116 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/textures/background.png" type="Texture" id=2]
-[ext_resource path="res://assets/textures/floor.png" type="Texture" id=3]
+[ext_resource path="res://entities/world/Floor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Main.gd" type="Script" id=4]
 [ext_resource path="res://entities/enemies/Turret.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/textures/player.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 72.0486, 16.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 408, 305 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 4 )
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
 expand = true
 
-[node name="Floor" type="TextureRect" parent="."]
-anchor_top = 0.699
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 3 )
-expand = true
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 413.003, 395.272 )
+position = Vector2( 404, 404 )
+gravity = 2.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( -15, -109 )
+current = true
 
 [node name="Turret" parent="." instance=ExtResource( 5 )]
-position = Vector2( 653, 117 )
+position = Vector2( 1814.5, 184.5 )
 rotation = 3.14159
 
 [node name="Turret2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 112, 159 )
+position = Vector2( 1273.5, 226.5 )
 rotation = 3.14159
 
 [node name="Turret3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 351, 145 )
-rotation = 3.14159
+position = Vector2( 1512.5, 212.5 )
+rotation = 3.15313
+
+[node name="Floor" parent="." instance=ExtResource( 3 )]
+position = Vector2( 397, 537 )
+
+[node name="Floor5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 548, 613 )
+rotation = -0.391303
+
+[node name="Floor2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1193, 538 )
+
+[node name="Floor3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1976, 539 )
+
+[node name="Floor4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 2773, 540 )
+
+[node name="Cube" type="RigidBody2D" parent="."]
+position = Vector2( 214, 291 )
+
+[node name="Sprite" type="Sprite" parent="Cube"]
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cube"]
+shape = SubResource( 1 )
+
+[node name="Cube2" type="RigidBody2D" parent="."]
+position = Vector2( 340, 126 )
+
+[node name="Sprite" type="Sprite" parent="Cube2"]
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cube2"]
+shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 490, 336 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+scale = Vector2( 6.49239, -0.503101 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+light_mask = 2
+position = Vector2( 0.499992, 0.5 )
+scale = Vector2( 2.88, 1 )
+shape = SubResource( 2 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 389, 208 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D2"]
+scale = Vector2( 6.49239, -0.503101 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+light_mask = 2
+position = Vector2( 0.499992, 0.5 )
+scale = Vector2( 2.88, 1 )
+shape = SubResource( 2 )
+
+[node name="TurretSpawner" type="Area2D" parent="."]
+position = Vector2( 0, -5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TurretSpawner"]
+position = Vector2( 1525, 305 )
+shape = SubResource( 3 )
