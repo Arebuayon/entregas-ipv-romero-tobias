@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Samurai_Archer/Jump.png" type="Texture" id=2]
@@ -9,6 +9,32 @@
 [ext_resource path="res://assets/Samurai_Archer/Idle.png" type="Texture" id=7]
 [ext_resource path="res://assets/Samurai_Archer/Run.png" type="Texture" id=8]
 [ext_resource path="res://assets/Samurai_Archer/Shot.png" type="Texture" id=9]
+[ext_resource path="res://assets/Samurai_Archer/Dead.png" type="Texture" id=10]
+
+[sub_resource type="AtlasTexture" id=99]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=100]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=101]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=102]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=103]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 512, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=41]
 flags = 4
@@ -252,6 +278,11 @@ region = Rect2( 896, 0, 128, 128 )
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
+"frames": [ SubResource( 99 ), SubResource( 100 ), SubResource( 101 ), SubResource( 102 ), SubResource( 103 ) ],
+"loop": false,
+"name": "death",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ) ],
 "loop": true,
 "name": "idle",
@@ -292,11 +323,12 @@ gravity = 10.0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -0.936493, -0.165405 )
 frames = SubResource( 9 )
-animation = "jump"
-frame = 8
+animation = "death"
+frame = 4
 playing = true
 
 [node name="Cannon" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 3 )
 script = ExtResource( 4 )
 ball_scene = ExtResource( 5 )

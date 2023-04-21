@@ -10,6 +10,7 @@ export var jump_speed = -20.0
 export var gravity = 2.0
 var esta_disparando = false
 var esta_saltando = false
+var esta_muerto = false
 
 
 func set_ball_container(container:Node):
@@ -24,14 +25,14 @@ func _physics_process(delta):
 	
 	#DISPARO
 	if Input.is_action_just_pressed("shoot"):
-		if not esta_disparando && not esta_saltando:
+		if not esta_disparando && not esta_saltando && not esta_muerto:
 			$AnimatedSprite.set_speed_scale(5.0)
 			$AnimatedSprite.play("shoot")
 			esta_disparando = true
 	
 	#SALTO
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor() && not esta_disparando:
+		if is_on_floor() && not esta_disparando && not esta_muerto:
 			esta_saltando = true
 			$AnimatedSprite.set_speed_scale(2.0)
 			$AnimatedSprite.play("jump")	
@@ -40,7 +41,7 @@ func _physics_process(delta):
 		velocity.y += gravity
 	
 	#MOVIMIENTO
-	if not esta_disparando && not esta_saltando:
+	if not esta_disparando && not esta_saltando && not esta_muerto:
 		var direction:int = 0
 		if Input.is_action_pressed("move_left"):
 			direction = -1
@@ -60,11 +61,10 @@ func _physics_process(delta):
 		else:
 			velocity.x = lerp(velocity.x, 0, friction) if abs(velocity.x) > 1 else 0
 			$AnimatedSprite.play("idle")
-		move_and_slide(velocity,Vector2.UP)
+		move_and_slide_with_snap(velocity,Vector2(0,-1),Vector2.UP)
 
 
 func _on_AnimatedSprite_animation_finished():
-	print($AnimatedSprite.animation)
 	if $AnimatedSprite.animation == "shoot":
 		cannon.fire()
 		$AnimatedSprite.set_speed_scale(1.0)
@@ -74,3 +74,11 @@ func _on_AnimatedSprite_animation_finished():
 		$AnimatedSprite.set_speed_scale(1.0)
 		$AnimatedSprite.play("idle")
 		esta_saltando = false
+
+func death():
+	esta_muerto = true
+	$Collision.disabled = true
+	$AnimatedSprite.stop()
+	$AnimatedSprite.play("death")
+
+

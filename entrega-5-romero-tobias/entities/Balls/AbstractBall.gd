@@ -23,10 +23,14 @@ func set_starting_values(starting_position:Vector2 , direction:Vector2 , rotatio
 func _physics_process(delta):
 	position += direction*speed*delta
 	var obj_pos = position
+
 	#if obj_pos.x < screen_size.position.x or obj_pos.x > screen_size.size.x or obj_pos.y < screen_size.position.y or obj_pos.y > screen_size.size.y:
 	#	emit_signal("delete_requested" , self)
 
 
 func _on_Ball_body_entered(body):
-	print(body)
-	body.queue_free()
+	body.death()
+
+
+func _on_Timer_timeout():
+	emit_signal("delete_requested" , self)

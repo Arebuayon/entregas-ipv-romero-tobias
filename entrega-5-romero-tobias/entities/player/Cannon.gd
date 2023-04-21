@@ -15,3 +15,4 @@ func fire():
 func _on_ball_delete_requested(ball):
 	ball_container.remove_child((ball))
 	ball.queue_free()
+	print("borre player")
