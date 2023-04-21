@@ -1,29 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://entities/Balls/AbstractBall.gd" type="Script" id=1]
-[ext_resource path="res://assets/Samurai_Archer/Arrow.png" type="Texture" id=2]
+[ext_resource path="res://entities/Balls/AbstractBall.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/textures/proyectile_player.png" type="Texture" id=2]
 
-[sub_resource type="RayShape2D" id=1]
-length = 17.7847
-
-[node name="Ball" type="Area2D"]
-collision_layer = 0
-collision_mask = 8
-script = ExtResource( 1 )
+[node name="Ball" instance=ExtResource( 1 )]
+texture = ExtResource( 2 )
 speed = 500.0
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" parent="." index="0"]
 wait_time = 3.0
-one_shot = true
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 19, -1.19209e-07 )
-rotation = -1.57927
-scale = Vector2( 0.829591, 0.366672 )
-shape = SubResource( 1 )
-one_way_collision_margin = 0.0
-
-[connection signal="body_entered" from="." to="." method="_on_Ball_body_entered"]
