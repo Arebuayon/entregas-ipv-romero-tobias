@@ -1,0 +1,247 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://src/entities/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/textures/background/Layer_0010_1.png" type="Texture" id=2]
+[ext_resource path="res://Main.gd" type="Script" id=3]
+[ext_resource path="res://src/entities/enemies/Turret.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/entities/enemies/TurretsSpawner.gd" type="Script" id=5]
+[ext_resource path="res://src/enviroment/Platform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/enviroment/Ramp.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/enviroment/Trophy.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/enviroment/Obstacle.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/enviroment/Floor.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/enviroment/Wall.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/textures/background/Layer_0002_7.png" type="Texture" id=12]
+[ext_resource path="res://assets/textures/background/Layer_0003_6.png" type="Texture" id=13]
+[ext_resource path="res://assets/textures/background/Layer_0000_9.png" type="Texture" id=14]
+[ext_resource path="res://assets/textures/background/Layer_0006_4.png" type="Texture" id=15]
+[ext_resource path="res://assets/textures/background/Layer_0001_8.png" type="Texture" id=16]
+[ext_resource path="res://assets/textures/background/Layer_0005_5.png" type="Texture" id=17]
+[ext_resource path="res://assets/textures/background/Layer_0009_2.png" type="Texture" id=18]
+[ext_resource path="res://assets/textures/background/Layer_0008_3.png" type="Texture" id=19]
+[ext_resource path="res://assets/textures/background/Layer_0004_Lights.png" type="Texture" id=20]
+[ext_resource path="res://assets/textures/background/Layer_0007_Lights.png" type="Texture" id=21]
+[ext_resource path="res://assets/textures/tileset/terrain.tres" type="TileSet" id=22]
+
+[node name="Main" type="Node"]
+script = ExtResource( 3 )
+
+[node name="CanvasLayer" type="ParallaxBackground" parent="."]
+layer = -1
+offset = Vector2( 0, -200 )
+transform = Transform2D( 1, 0, 0, 1, 0, -200 )
+scroll_base_scale = Vector2( -0.3, 0.1 )
+
+[node name="ParallaxLayer11" type="ParallaxLayer" parent="CanvasLayer"]
+motion_scale = Vector2( 0.05, 1 )
+motion_mirroring = Vector2( 927, 793 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxLayer11"]
+margin_right = 928.0
+margin_bottom = 793.0
+texture = ExtResource( 2 )
+
+[node name="ParallaxLayer10" type="ParallaxLayer" parent="CanvasLayer"]
+motion_scale = Vector2( 0.1, 1 )
+motion_mirroring = Vector2( 928, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxLayer10"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 18 )
+
+[node name="ParallaxLayer9" type="ParallaxLayer" parent="CanvasLayer"]
+visible = false
+motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 928, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxLayer9"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 19 )
+
+[node name="ParallaxLayer8" type="ParallaxLayer" parent="CanvasLayer"]
+motion_scale = Vector2( 0.3, 1 )
+motion_mirroring = Vector2( 928, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxLayer8"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 21 )
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="CanvasLayer"]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 928, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxLayer7"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 15 )
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="CanvasLayer"]
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 928, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxLayer6"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 17 )
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="CanvasLayer"]
+motion_scale = Vector2( 0.6, 1 )
+motion_mirroring = Vector2( 928, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxLayer5"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 20 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="CanvasLayer"]
+motion_scale = Vector2( 0.7, 1 )
+motion_mirroring = Vector2( 928, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxLayer4"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 13 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="CanvasLayer"]
+motion_scale = Vector2( 0.8, 1 )
+motion_mirroring = Vector2( 928, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxLayer3"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 12 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="CanvasLayer"]
+motion_scale = Vector2( 0.9, 1 )
+motion_mirroring = Vector2( 928, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxLayer2"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 16 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer"]
+motion_mirroring = Vector2( 928, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ParallaxLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 14 )
+
+[node name="Environment" type="Node2D" parent="."]
+position = Vector2( 1, 0 )
+
+[node name="Ground" type="Node2D" parent="Environment"]
+
+[node name="Ramp" parent="Environment/Ground" instance=ExtResource( 7 )]
+position = Vector2( 1372, 578 )
+
+[node name="Ramp2" parent="Environment/Ground" instance=ExtResource( 7 )]
+position = Vector2( 272, 559 )
+rotation = 0.587365
+
+[node name="Ramp3" parent="Environment/Ground" instance=ExtResource( 7 )]
+position = Vector2( 617, 624 )
+rotation = -0.601429
+
+[node name="Floor" parent="Environment/Ground" instance=ExtResource( 10 )]
+position = Vector2( 1396, 1246 )
+
+[node name="floor" parent="Environment/Ground/Floor" index="0"]
+position = Vector2( 329.506, -0.377991 )
+region_rect = Rect2( 53.218, 0.989452, 319.005, 377.789 )
+
+[node name="CollisionShape2D" parent="Environment/Ground/Floor" index="1"]
+position = Vector2( 329.506, -0.377991 )
+scale = Vector2( 0.92, 1 )
+
+[node name="Floor3" parent="Environment/Ground" instance=ExtResource( 10 )]
+position = Vector2( 174, 1242 )
+scale = Vector2( 0.78962, 1 )
+
+[node name="Floor2" parent="Environment/Ground" instance=ExtResource( 10 )]
+position = Vector2( 743, 1242 )
+
+[node name="floor" parent="Environment/Ground/Floor2" index="0"]
+position = Vector2( 276, 0.999939 )
+region_rect = Rect2( 63.2402, 0.989452, 272.76, 377.789 )
+
+[node name="CollisionShape2D" parent="Environment/Ground/Floor2" index="1"]
+scale = Vector2( 0.880236, 1 )
+
+[node name="Wall" parent="Environment/Ground" instance=ExtResource( 11 )]
+position = Vector2( -17, 1007 )
+
+[node name="Platform" parent="Environment/Ground" instance=ExtResource( 6 )]
+position = Vector2( 1472.51, 221.622 )
+
+[node name="Platform2" parent="Environment/Ground" instance=ExtResource( 6 )]
+position = Vector2( 1728.51, 261.622 )
+
+[node name="Platform3" parent="Environment/Ground" instance=ExtResource( 6 )]
+position = Vector2( 1584.51, 413.622 )
+
+[node name="Platform4" parent="Environment/Ground" instance=ExtResource( 6 )]
+position = Vector2( 449.581, 484.16 )
+
+[node name="Platform5" parent="Environment/Ground" instance=ExtResource( 6 )]
+position = Vector2( 545.103, 484.106 )
+
+[node name="Entities" type="Node2D" parent="Environment"]
+
+[node name="Player" parent="Environment/Entities" instance=ExtResource( 1 )]
+position = Vector2( 152.506, 477.622 )
+
+[node name="Camera" type="Camera2D" parent="Environment/Entities/Player"]
+position = Vector2( 244.494, -52.622 )
+current = true
+
+[node name="TurretsSpawner" type="Position2D" parent="Environment/Entities"]
+position = Vector2( 1269.72, 24.3184 )
+script = ExtResource( 5 )
+turret_scene = ExtResource( 4 )
+extents = Vector2( 300, -350 )
+
+[node name="Turret" parent="Environment/Entities/TurretsSpawner" instance=ExtResource( 4 )]
+position = Vector2( 323.28, 457.682 )
+
+[node name="Turret2" parent="Environment/Entities/TurretsSpawner" instance=ExtResource( 4 )]
+position = Vector2( 2075.28, -103.318 )
+
+[node name="Turret3" parent="Environment/Entities/TurretsSpawner" instance=ExtResource( 4 )]
+position = Vector2( 3133.28, 319.682 )
+
+[node name="Turret4" parent="Environment/Entities/TurretsSpawner" instance=ExtResource( 4 )]
+position = Vector2( 3978.28, 70.6816 )
+
+[node name="Obstacles" type="Node2D" parent="Environment/Entities"]
+
+[node name="Obstacle" parent="Environment/Entities/Obstacles" instance=ExtResource( 9 )]
+position = Vector2( 1496.68, 186.419 )
+
+[node name="Obstacle2" parent="Environment/Entities/Obstacles" instance=ExtResource( 9 )]
+position = Vector2( 485.687, 442.792 )
+
+[node name="Obstacle3" parent="Environment/Entities/Obstacles" instance=ExtResource( 9 )]
+position = Vector2( 485.266, 399.065 )
+mass = 20.0
+
+[node name="Obstacle4" parent="Environment/Entities/Obstacles" instance=ExtResource( 9 )]
+position = Vector2( 515.538, 442.371 )
+
+[node name="Obstacle5" parent="Environment/Entities/Obstacles" instance=ExtResource( 9 )]
+position = Vector2( 516.379, 398.224 )
+
+[node name="Trophy" parent="Environment/Entities" instance=ExtResource( 8 )]
+position = Vector2( 5827, 20 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 22 )
+format = 1
+tile_data = PoolIntArray( -720799, -1073741824, 0, -720796, -1073741823, 0, -458655, -1073741824, 0, -458652, -1073741823, 0, -327681, 5, 0, -393216, 5, 0, -393215, 1, 0, -262145, 5, 0, -327680, 5, 0, -196609, -1073741823, 0, -196511, -1073741824, 0, -196508, -1073741823, 0, 65535, -1073741823, 0, 65586, 2, 0, 65626, 3, 0, 65633, -1073741824, 0, 65636, -1073741823, 0, 196652, 2, 0, 196689, 3, 0, 327679, -1073741823, 0, 262202, 3, 0, 327719, 2, 0, 327757, 3, 0, 327777, -1073741824, 0, 327780, -1073741823, 0, 393289, 3, 0, 589823, -1610612731, 0, 524288, -1610612731, 0, 524289, 6, 0, 524290, 0, 0, 524294, 0, 0, 524298, 0, 0, 524302, 0, 0, 524306, 0, 0, 524310, 0, 0, 524314, 0, 0, 524318, 0, 0, 524322, 0, 0, 524326, 8, 0, 524349, -1610612723, 0, 524351, 1610612737, 0, 524355, 1610612737, 0, 524359, 1610612737, 0, 524362, 1610612737, 0, 524366, 1610612737, 0, 524370, 1610612737, 0, 524374, 1610612737, 0, 524378, 1610612737, 0, 524382, 1610612737, 0, 524386, 5, 0, 655359, -1610612731, 0, 589824, -1610612731, 0, 589825, -1610612731, 0, 589862, 1610612747, 0, 589885, -1073741818, 0, 589886, 5, 0, 589922, 5, 0, 589923, -1073741819, 0, 589924, -1073741823, 0, 720895, -1610612731, 0, 655360, -1610612731, 0, 655361, -1610612731, 0, 655397, 5, 0, 655421, 13, 0, 655422, 1, 0, 655423, 1, 0, 655426, 1, 0, 655429, 1, 0, 655431, 1, 0, 655435, 1, 0, 655439, 1, 0, 655443, 1, 0, 655447, 1, 0, 655451, 1, 0, 655454, 1, 0, 655458, 1, 0, 655459, -1073741819, 0, 786431, 1, 0, 720899, 1, 0, 720903, 1, 0, 720907, 1, 0, 720911, 1, 0, 720912, 1, 0, 720916, 1, 0, 720920, 1, 0, 720924, 1, 0, 720928, 1, 0, 720929, 1, 0, 720930, 1, 0, 720931, 1, 0 )
+
+[editable path="Environment/Ground/Floor"]
+[editable path="Environment/Ground/Floor2"]

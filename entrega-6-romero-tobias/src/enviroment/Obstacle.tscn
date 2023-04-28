@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/textures/tileset/tileset_mk_16_16_nature_tileset_godot.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14, 20 )
+
+[node name="Obstacle" type="RigidBody2D"]
+mass = 5.0
+gravity_scale = 5.0
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.4375, 0.609375 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 79.1312, 1.0886, 63.1411, 66.7345 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
