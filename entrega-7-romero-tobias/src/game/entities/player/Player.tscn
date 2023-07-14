@@ -1,0 +1,103 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://src/game/entities/player/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/player/girl_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/player/raygunPurpleBig.png" type="Texture" id=3]
+[ext_resource path="res://src/game/entities/player/Cannon.gd" type="Script" id=4]
+[ext_resource path="res://src/game/entities/player/PlayerProjectile.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/textures/player/slimeGreen.png" type="Texture" id=6]
+[ext_resource path="res://src/game/entities/player/playerwalk.tres" type="Animation" id=7]
+[ext_resource path="res://src/game/entities/player/playerdead.tres" type="Animation" id=8]
+[ext_resource path="res://src/game/entities/player/playeridle.tres" type="Animation" id=9]
+[ext_resource path="res://src/game/entities/player/playerjump.tres" type="Animation" id=10]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Slime:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.158768, -152.913 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Slime:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 6752, 3008 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 26.0
+height = 70.0
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource( 1 )
+
+[node name="BodyAnimations" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 4 )
+anims/dead = ExtResource( 8 )
+anims/idle = ExtResource( 9 )
+anims/jump = ExtResource( 10 )
+anims/walk = ExtResource( 7 )
+
+[node name="Body" type="Sprite" parent="."]
+position = Vector2( -0.0635071, 0.165405 )
+scale = Vector2( 0.4, 0.4 )
+texture = SubResource( 2 )
+offset = Vector2( 50, 0 )
+hframes = 15
+vframes = 8
+frame = 30
+
+[node name="Slime" type="Sprite" parent="Body"]
+position = Vector2( 0.158768, -152.913 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[node name="CannonContainer" type="Node2D" parent="Body/Slime"]
+
+[node name="Cannon" type="Sprite" parent="Body/Slime/CannonContainer"]
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+projectile_scene = ExtResource( 5 )
+
+[node name="CannonTip" type="Position2D" parent="Body/Slime/CannonContainer/Cannon"]
+position = Vector2( 15, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="FloorRaycasts" type="Node2D" parent="."]
+position = Vector2( 0, 60 )
+
+[node name="RayCast2D" type="RayCast2D" parent="FloorRaycasts"]
+cast_to = Vector2( 0, 5 )
+
+[node name="RayCast2D2" type="RayCast2D" parent="FloorRaycasts"]
+position = Vector2( -15, 0 )
+cast_to = Vector2( 0, 5 )
+
+[node name="RayCast2D3" type="RayCast2D" parent="FloorRaycasts"]
+position = Vector2( 15, 0 )
+cast_to = Vector2( 0, 5 )
+
+[connection signal="animation_finished" from="BodyAnimations" to="." method="_on_BodyAnimations_animation_finished"]
